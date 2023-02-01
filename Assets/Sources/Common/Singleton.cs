@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class Singleton : MonoBehaviour
+public abstract class Singleton
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+}
+
+public abstract class Singleton<T> : Singleton where T: new()
+{
+    public static readonly T Instance;
+
+    static Singleton()
     {
-        
+        Instance = new T();
     }
 }
