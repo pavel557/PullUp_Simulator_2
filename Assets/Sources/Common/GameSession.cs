@@ -14,11 +14,4 @@ public class GameSession : Singleton<GameSession>
     public int SumPullups;
     public int MaxPillups;
     public int MaxNumberRepetitions;
-
-    public void ChangeCurrentAmountEnergy(int value)
-    {
-        CurrentAmountEnergy += value;
-        Mathf.Clamp(CurrentAmountEnergy, 0, MaxAmountEnergy);
-        Debug.Log(CurrentAmountEnergy);
-    }
 }
