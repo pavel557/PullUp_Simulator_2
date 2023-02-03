@@ -4,56 +4,68 @@ using UnityEngine;
 
 public class GameSession : Singleton<GameSession>
 {
-    public int Day
+    public int Day { get; private set; }
+    public int Money { get; private set; }
+    public int MaxAmountEnergy { get; private set; }
+    public int CurrentAmountEnergy { get; private set; }
+    public int AmountFatigue { get; private set; }
+    public int SumPullups { get; private set; }
+    public int MaxPullups { get; private set; }
+    public int MaxNumberRepetitions { get; private set; }
+
+    public void Init()
     {
-        get => Day;
-        set
-        {
-            Day = value;
-            The.EventManager.DayChanged?.Invoke(Day);
-        }
-    }
-    public int Money
-    {
-        get => Money;
-        set
-        {
-            Money = value;
-            The.EventManager.MoneyChanged?.Invoke(Money);
-        }
+        Day = 1;
+        Money = 0;
+        MaxAmountEnergy = 100;
+        CurrentAmountEnergy = 100;
+        AmountFatigue = 0;
+
+        SumPullups = 0;
+        MaxPullups = 0;
+        MaxNumberRepetitions = 0;
     }
 
-    public int MaxAmountEnergy
+    public void Init(int day, int money, int maxAmountEnergy, int currentAmountEnergy, int amountFatigue, int sumPullups, int maxPullups, int maxNumberRepetitions)
     {
-        get => MaxAmountEnergy;
-        set
-        {
-            MaxAmountEnergy = value;
-            The.EventManager.AmountEnergyChanged?.Invoke(CurrentAmountEnergy, MaxAmountEnergy);
-        }
+        Day = day;
+        Money = money;
+        MaxAmountEnergy = maxAmountEnergy;
+        CurrentAmountEnergy = currentAmountEnergy;
+        AmountFatigue = amountFatigue;
+
+        SumPullups = sumPullups;
+        MaxPullups = maxPullups;
+        MaxNumberRepetitions = maxNumberRepetitions;
     }
 
-    public int CurrentAmountEnergy
+    public void ChangeDay(int valueChange)
     {
-        get => CurrentAmountEnergy;
-        set
-        {
-            CurrentAmountEnergy = value;
-            The.EventManager.AmountEnergyChanged?.Invoke(CurrentAmountEnergy, MaxAmountEnergy);
-        }
+        Day += valueChange;
+        The.EventManager.DayChanged(Day);
     }
 
-    public int AmountFatigue
+    public void ChangeMoney(int valueChange)
     {
-        get => AmountFatigue;
-        set
-        {
-            AmountFatigue = value;
-            The.EventManager.AmountFatigueChanged?.Invoke(AmountFatigue);
-        }
+        Money += valueChange;
+        The.EventManager.MoneyChanged(Money);
     }
 
-    public int SumPullups;
-    public int MaxPillups;
-    public int MaxNumberRepetitions;
+    public void ChangeMaxAmountEnergy(int valueChange)
+    {
+        MaxAmountEnergy += valueChange;
+        The.EventManager.AmountEnergyChanged(CurrentAmountEnergy, MaxAmountEnergy);
+    }
+
+    public void ChangeCurrentAmountEnergy(int valueChange)
+    {
+        CurrentAmountEnergy += valueChange;
+        The.EventManager.AmountEnergyChanged(CurrentAmountEnergy, MaxAmountEnergy);
+    }
+
+    public void ChangeAmountFatigue(int valueChange)
+    {
+        AmountFatigue += valueChange;
+        The.EventManager.AmountFatigueChanged(AmountFatigue);
+    }
 }
