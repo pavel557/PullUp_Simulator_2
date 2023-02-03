@@ -13,4 +13,6 @@ public class EventManager : Singleton<EventManager>
     public Action<int> AmountFatigueChanged;
 
     public Action StartPullUp;
+    public Action PullUp;
+    public Action EndPullUp;
 }

@@ -10,6 +10,7 @@ public class Main : MonoBehaviour
     {
         The.GameSession.Init();
         MainPanel.Init();
+        The.PullupManager.Init();
     }
 
     //void Update()

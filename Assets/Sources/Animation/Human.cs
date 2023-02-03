@@ -17,12 +17,15 @@ public class Human : MonoBehaviour
         IDEndPullUp = Animator.StringToHash("EndPullUp");
 
         The.EventManager.StartPullUp += StartPullUp;
+        The.EventManager.PullUp += PullUp;
+        The.EventManager.EndPullUp += EndPullUp;
     }
 
     public void StartPullUp()
     {
         ResetTriggers();
         HumanAnimator.SetTrigger(IDStartPullUp);
+        StartCoroutine(The.PullupManager.DecreaseForceCoroutine());
     }
 
     public void PullUp()
@@ -35,6 +38,7 @@ public class Human : MonoBehaviour
     {
         ResetTriggers();
         HumanAnimator.SetTrigger(IDEndPullUp);
+        StopCoroutine(The.PullupManager.DecreaseForceCoroutine());
     }
 
     private void ResetTriggers()

@@ -17,11 +17,13 @@ public class MainPanel : MonoBehaviour
         BottomPanel.Init();
         MainButton.interactable = false;
         The.EventManager.StartPullUp += () => { MainButton.interactable = true; };
+        The.EventManager.EndPullUp += () => { MainButton.interactable = false; };
         MainButton.onClick.AddListener(OnMainButtonClick);
     }
 
     public void OnMainButtonClick()
     {
         The.GameSession.ChangeCurrentAmountEnergy(-1);
+        The.PullupManager.ChangeCurrentForce(1);
     }
 }
