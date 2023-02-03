@@ -8,7 +8,7 @@ public class EventManager : Singleton<EventManager>
     public Action<int> DayChanged;
     public Action<int> MoneyChanged;
 
-    public Action<int> MaxAmountEnergyChanged;
-    public Action<int> CurrentAmountEnergyChanged;
+    //int : current, int : max
+    public Action<int, int> AmountEnergyChanged;
     public Action<int> AmountFatigueChanged;
 }

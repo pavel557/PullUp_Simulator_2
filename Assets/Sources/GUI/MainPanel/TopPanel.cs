@@ -10,8 +10,8 @@ public class TopPanel : MonoBehaviour
 
     public void Init()
     {
-        DayText.text = "Δενό " + The.GameSession.Day;
-        MoneyText.text = The.GameSession.Money.ToString();
+        ChangeDayText(The.GameSession.Day);
+        ChangeMoneyText(The.GameSession.Money);
 
         The.EventManager.DayChanged += ChangeDayText;
         The.EventManager.MoneyChanged += ChangeMoneyText;
@@ -24,6 +24,6 @@ public class TopPanel : MonoBehaviour
 
     private void ChangeMoneyText(int value)
     {
-        MoneyText.text = The.GameSession.Money.ToString();
+        MoneyText.text = value.ToString();
     }    
 }
