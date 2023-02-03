@@ -7,17 +7,20 @@ public class MainPanel : MonoBehaviour
 {
     [SerializeField] private TopPanel TopPanel;
     [SerializeField] private EnergyPanel EnergyPanel;
+    [SerializeField] private BottomPanel BottomPanel;
     [SerializeField] private Button MainButton;
 
     public void Init()
     {
         TopPanel.Init();
         EnergyPanel.Init();
-        MainButton.gameObject.SetActive(true);
-        MainButton.onClick.AddListener(OnMainPanelClick);
+        BottomPanel.Init();
+        MainButton.interactable = false;
+        The.EventManager.StartPullUp += () => { MainButton.interactable = true; };
+        MainButton.onClick.AddListener(OnMainButtonClick);
     }
 
-    public void OnMainPanelClick()
+    public void OnMainButtonClick()
     {
         The.GameSession.ChangeCurrentAmountEnergy(-1);
     }

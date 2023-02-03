@@ -11,4 +11,6 @@ public class EventManager : Singleton<EventManager>
     //int : current, int : max
     public Action<int, int> AmountEnergyChanged;
     public Action<int> AmountFatigueChanged;
+
+    public Action StartPullUp;
 }
