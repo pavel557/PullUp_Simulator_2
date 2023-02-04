@@ -12,6 +12,8 @@ public class BottomPanel : MonoBehaviour
         StartRepeatingButton.interactable = true;
 
         StartRepeatingButton.onClick.AddListener(OnStartRepeatingButtonClick);
+
+        The.EventManager.EndPullUp += () => { StartRepeatingButton.interactable = true; };
     }
 
     private void OnStartRepeatingButtonClick()

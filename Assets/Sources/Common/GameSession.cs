@@ -61,15 +61,24 @@ public class GameSession : Singleton<GameSession>
     {
         CurrentAmountEnergy += valueChange;
         The.EventManager.AmountEnergyChanged(CurrentAmountEnergy, MaxAmountEnergy);
+
         if (CurrentAmountEnergy <= 0)
         {
             The.EventManager.EndPullUp?.Invoke();
+            ChangeAmountFatigue(20);
+            ChangeCurrentAmountEnergy(MaxAmountEnergy - AmountFatigue);
         }
     }
 
     public void ChangeAmountFatigue(int valueChange)
     {
         AmountFatigue += valueChange;
+
+        if (AmountFatigue >= MaxAmountEnergy)
+        {
+            AmountFatigue = MaxAmountEnergy - 1;
+        }
+
         The.EventManager.AmountFatigueChanged(AmountFatigue);
     }
 }

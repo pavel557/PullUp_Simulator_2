@@ -30,7 +30,7 @@ public class Human : MonoBehaviour
 
     public void PullUp()
     {
-        ResetTriggers();
+        //ResetTriggers();
         HumanAnimator.SetTrigger(IDPullUp);
     }
 
