@@ -4,35 +4,39 @@ using UnityEngine;
 
 public class PullupManager : Singleton<PullupManager>
 {
-    public int CurrentForce { get; private set; }
+    public int CurrentAmountOfEffort { get; private set; }
 
-    public int RequiredForce { get; private set; }
+    public int RequiredAmountOfEffort { get; private set; }
+
+    public Coroutine DecreaseForce;
 
     private float ReloadingDecreaseForce;
 
     public void Init()
     {
-        CurrentForce = 0;
-        RequiredForce = 5;
-        ReloadingDecreaseForce = 1f;
+        CurrentAmountOfEffort = 0;
+        RequiredAmountOfEffort = The.ConfigManager.GetBasicAmountOfEffortForPullingUp();
+        ReloadingDecreaseForce = The.ConfigManager.GetTimeToLoseEnergyDuringPullUps();
     }
 
     public void ChangeCurrentForce(int valueChange)
     {
-        CurrentForce += valueChange;
+        CurrentAmountOfEffort += valueChange;
 
-        if (CurrentForce < 0)
+        if (CurrentAmountOfEffort < 0)
         {
-            CurrentForce = 0;
+            CurrentAmountOfEffort = 0;
             return;
         }
 
-        if (CurrentForce >= RequiredForce)
+        if (CurrentAmountOfEffort >= RequiredAmountOfEffort)
         {
             The.EventManager.PullUp?.Invoke();
 
-            CurrentForce = 0;
-            //Расчёт новой RequiredForce
+            CurrentAmountOfEffort = 0;
+            
+            //дописать формулу
+            RequiredAmountOfEffort = The.ConfigManager.GetBasicAmountOfEffortForPullingUp();
         }
     }
 
@@ -42,6 +46,7 @@ public class PullupManager : Singleton<PullupManager>
         {
             yield return new WaitForSeconds(ReloadingDecreaseForce);
             ChangeCurrentForce(-1);
+            The.GameSession.ChangeCurrentAmountEnergy(-1);
         }
     }
 }

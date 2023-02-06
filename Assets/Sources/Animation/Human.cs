@@ -25,7 +25,7 @@ public class Human : MonoBehaviour
     {
         ResetTriggers();
         HumanAnimator.SetTrigger(IDStartPullUp);
-        StartCoroutine(The.PullupManager.DecreaseForceCoroutine());
+        The.PullupManager.DecreaseForce = StartCoroutine(The.PullupManager.DecreaseForceCoroutine());
     }
 
     public void PullUp()
@@ -38,7 +38,7 @@ public class Human : MonoBehaviour
     {
         ResetTriggers();
         HumanAnimator.SetTrigger(IDEndPullUp);
-        StopCoroutine(The.PullupManager.DecreaseForceCoroutine());
+        StopCoroutine(The.PullupManager.DecreaseForce);
     }
 
     private void ResetTriggers()

@@ -39,9 +39,10 @@ public class GameSession : Singleton<GameSession>
         MaxNumberRepetitions = maxNumberRepetitions;
     }
 
-    public void ChangeDay(int valueChange)
+    public void ChangeDay()
     {
-        Day += valueChange;
+        Day++;
+
         The.EventManager.DayChanged(Day);
     }
 
@@ -65,7 +66,10 @@ public class GameSession : Singleton<GameSession>
         if (CurrentAmountEnergy <= 0)
         {
             The.EventManager.EndPullUp?.Invoke();
-            ChangeAmountFatigue(20);
+
+            int amountFatigue = Mathf.RoundToInt(MaxAmountEnergy * The.ConfigManager.GetFatiguePercentageAfterRepetition());
+            ChangeAmountFatigue(amountFatigue);
+
             ChangeCurrentAmountEnergy(MaxAmountEnergy - AmountFatigue);
         }
     }

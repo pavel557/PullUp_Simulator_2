@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartRepeatingButton: {fileID: 759891063}
+  EndDayButton: {fileID: 783193865}
 --- !u!1 &145939302
 GameObject:
   m_ObjectHideFlags: 0

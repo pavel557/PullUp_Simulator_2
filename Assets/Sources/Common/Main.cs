@@ -8,6 +8,7 @@ public class Main : MonoBehaviour
 
     void Start()
     {
+        The.ConfigManager.Init();
         The.GameSession.Init();
         MainPanel.Init();
         The.PullupManager.Init();
