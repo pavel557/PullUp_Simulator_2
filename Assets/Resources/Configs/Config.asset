@@ -12,9 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab0207a68118c9240a62d14f158bbd9e, type: 3}
   m_Name: Config
   m_EditorClassIdentifier: 
-  FatiguePercentageAfterRepetition: []
-  RecoveryPercentageAtEndOfDay: []
-  EnergyGainBonusPercentageAtEndOfDay: []
-  FatigueLossBonusPercentageAtEndOfDay: []
-  BasicAmountOfEffortForPullingUp: []
-  TimeToLoseEnergyDuringPullUps: []
+  FatiguePercentageAfterRepetition:
+  - 0.33
+  - 0.27
+  - 0.24
+  - 0.2
+  - 0.15
+  RecoveryPercentageAtEndOfDay:
+  - 0.5
+  - 0.55
+  - 0.65
+  - 0.8
+  - 0.95
+  EnergyGainBonusPercentageAtEndOfDay:
+  - 0
+  - 0.05
+  - 0.15
+  - 0.3
+  - 0.5
+  BasicAmountOfEffortForPullingUp: 0a00000009000000080000000700000006000000
+  TimeToLoseEnergyDuringPullUps:
+  - 0.75
+  - 0.9
+  - 1
+  - 1.2
+  - 1.5

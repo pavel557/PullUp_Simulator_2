@@ -8,6 +8,7 @@ public class MainPanel : MonoBehaviour
     [SerializeField] private TopPanel TopPanel;
     [SerializeField] private EnergyPanel EnergyPanel;
     [SerializeField] private BottomPanel BottomPanel;
+    [SerializeField] private CounterPullup CounterPullup;
     [SerializeField] private Button MainButton;
 
     public void Init()
@@ -15,6 +16,7 @@ public class MainPanel : MonoBehaviour
         TopPanel.Init();
         EnergyPanel.Init();
         BottomPanel.Init();
+        CounterPullup.Init();
         MainButton.interactable = false;
         The.EventManager.StartPullUp += () => { MainButton.interactable = true; };
         The.EventManager.EndPullUp += () => { MainButton.interactable = false; };

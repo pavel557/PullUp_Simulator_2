@@ -5,8 +5,8 @@ using UnityEngine;
 public class PullupManager : Singleton<PullupManager>
 {
     public int CurrentAmountOfEffort { get; private set; }
-
     public int RequiredAmountOfEffort { get; private set; }
+    public int CurrentAmountPullups { get; private set; }
 
     public Coroutine DecreaseForce;
 
@@ -16,7 +16,11 @@ public class PullupManager : Singleton<PullupManager>
     {
         CurrentAmountOfEffort = 0;
         RequiredAmountOfEffort = The.ConfigManager.GetBasicAmountOfEffortForPullingUp();
+        CurrentAmountPullups = 0;
+
         ReloadingDecreaseForce = The.ConfigManager.GetTimeToLoseEnergyDuringPullUps();
+
+        The.EventManager.EndPullUp += () => { CurrentAmountPullups = 0; };
     }
 
     public void ChangeCurrentForce(int valueChange)
@@ -31,12 +35,15 @@ public class PullupManager : Singleton<PullupManager>
 
         if (CurrentAmountOfEffort >= RequiredAmountOfEffort)
         {
-            The.EventManager.PullUp?.Invoke();
+            The.GameSession.ChangeMoney(1);
+            CurrentAmountPullups++;
 
             CurrentAmountOfEffort = 0;
-            
+
             //дописать формулу
             RequiredAmountOfEffort = The.ConfigManager.GetBasicAmountOfEffortForPullingUp();
+
+            The.EventManager.PullUp?.Invoke();
         }
     }
 
