@@ -7,6 +7,7 @@ public class PullupManager : Singleton<PullupManager>
     public int CurrentAmountOfEffort { get; private set; }
     public int RequiredAmountOfEffort { get; private set; }
     public int CurrentAmountPullups { get; private set; }
+    public int SumPullups { get; private set; }
 
     public Coroutine DecreaseForce;
 
@@ -17,10 +18,12 @@ public class PullupManager : Singleton<PullupManager>
         CurrentAmountOfEffort = 0;
         RequiredAmountOfEffort = The.ConfigManager.GetBasicAmountOfEffortForPullingUp();
         CurrentAmountPullups = 0;
+        SumPullups = 0;
 
         ReloadingDecreaseForce = The.ConfigManager.GetTimeToLoseEnergyDuringPullUps();
 
         The.EventManager.EndPullUp += () => { CurrentAmountPullups = 0; };
+        The.EventManager.DayChanged += (int day) => { SumPullups = 0; };
     }
 
     public void ChangeCurrentForce(int valueChange)
@@ -33,10 +36,11 @@ public class PullupManager : Singleton<PullupManager>
             return;
         }
 
-        if (CurrentAmountOfEffort >= RequiredAmountOfEffort)
+        if ((CurrentAmountOfEffort >= RequiredAmountOfEffort)&&(The.GameSession.CurrentAmountEnergy != 0))
         {
             The.GameSession.ChangeMoney(1);
             CurrentAmountPullups++;
+            SumPullups++;
 
             CurrentAmountOfEffort = 0;
 

@@ -33,7 +33,5 @@ public class BottomPanel : MonoBehaviour
     private void OnEndDayButtonClick()
     {
         The.GameSession.ChangeDay();
-
-        The.GameSession.ChangeMaxAmountEnergy(1);
     }
 }

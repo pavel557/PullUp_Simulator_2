@@ -28,6 +28,11 @@ public class ConfigManager : Singleton<ConfigManager>
         return Config.FatiguePercentageAfterRepetition[IndexFatiguePercentageAfterRepetition];
     }
 
+    public float GetRecoveryPercentageAtEndOfDay()
+    {
+        return Config.RecoveryPercentageAtEndOfDay[IndexRecoveryPercentageAtEndOfDay];
+    }
+
     public int GetBasicAmountOfEffortForPullingUp()
     {
         return Config.BasicAmountOfEffortForPullingUp[IndexBasicAmountOfEffortForPullingUp];

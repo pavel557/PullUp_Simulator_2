@@ -9,7 +9,6 @@ public class GameSession : Singleton<GameSession>
     public int MaxAmountEnergy { get; private set; }
     public int CurrentAmountEnergy { get; private set; }
     public int AmountFatigue { get; private set; }
-    public int SumPullups { get; private set; }
     public int MaxPullups { get; private set; }
     public int MaxNumberRepetitions { get; private set; }
 
@@ -21,7 +20,6 @@ public class GameSession : Singleton<GameSession>
         CurrentAmountEnergy = 100;
         AmountFatigue = 0;
 
-        SumPullups = 0;
         MaxPullups = 0;
         MaxNumberRepetitions = 0;
     }
@@ -34,7 +32,6 @@ public class GameSession : Singleton<GameSession>
         CurrentAmountEnergy = currentAmountEnergy;
         AmountFatigue = amountFatigue;
 
-        SumPullups = sumPullups;
         MaxPullups = maxPullups;
         MaxNumberRepetitions = maxNumberRepetitions;
     }
@@ -42,6 +39,11 @@ public class GameSession : Singleton<GameSession>
     public void ChangeDay()
     {
         Day++;
+        ChangeMaxAmountEnergy(The.PullupManager.SumPullups);
+
+        int amountFatigue = Mathf.RoundToInt(MaxAmountEnergy * The.ConfigManager.GetRecoveryPercentageAtEndOfDay());
+        ChangeAmountFatigue(-amountFatigue);
+        SetCurrentAmountEnergy(MaxAmountEnergy - AmountFatigue);
 
         The.EventManager.DayChanged(Day);
     }
@@ -70,8 +72,14 @@ public class GameSession : Singleton<GameSession>
             int amountFatigue = Mathf.RoundToInt(MaxAmountEnergy * The.ConfigManager.GetFatiguePercentageAfterRepetition());
             ChangeAmountFatigue(amountFatigue);
 
-            ChangeCurrentAmountEnergy(MaxAmountEnergy - AmountFatigue);
+            SetCurrentAmountEnergy(MaxAmountEnergy - AmountFatigue);
         }
+    }
+
+    public void SetCurrentAmountEnergy(int value)
+    {
+        CurrentAmountEnergy = value;
+        The.EventManager.AmountEnergyChanged(CurrentAmountEnergy, MaxAmountEnergy);
     }
 
     public void ChangeAmountFatigue(int valueChange)
@@ -81,6 +89,11 @@ public class GameSession : Singleton<GameSession>
         if (AmountFatigue >= MaxAmountEnergy)
         {
             AmountFatigue = MaxAmountEnergy - 1;
+        }
+
+        if (AmountFatigue < 0)
+        {
+            AmountFatigue = 0;
         }
 
         The.EventManager.AmountFatigueChanged(AmountFatigue);
