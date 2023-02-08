@@ -17,7 +17,6 @@ public class BottomPanel : MonoBehaviour
         StartRepeatingButton.onClick.AddListener(OnStartRepeatingButtonClick);
         EndDayButton.onClick.AddListener(OnEndDayButtonClick);
 
-        //јктивировать кнопку, когда подт€шивание завершено
         The.EventManager.EndPullUp += () => { StartRepeatingButton.interactable = true; };
         The.EventManager.EndPullUp += () => { EndDayButton.interactable = true; };
     }
@@ -32,6 +31,8 @@ public class BottomPanel : MonoBehaviour
 
     private void OnEndDayButtonClick()
     {
-        The.GameSession.ChangeDay();
+        var objPanel = Instantiate(Resources.Load<GameObject>("GUI/NextDayPanel"), transform.parent.parent);
+        var nextDayPanel = objPanel.GetComponent<NextDayPanel>();
+        nextDayPanel.Init();
     }
 }

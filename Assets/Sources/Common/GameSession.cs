@@ -41,7 +41,7 @@ public class GameSession : Singleton<GameSession>
         Day++;
         ChangeMaxAmountEnergy(The.PullupManager.SumPullups);
 
-        int amountFatigue = Mathf.RoundToInt(MaxAmountEnergy * The.ConfigManager.GetRecoveryPercentageAtEndOfDay());
+        int amountFatigue = CalculateFatigueChange();
         ChangeAmountFatigue(-amountFatigue);
         SetCurrentAmountEnergy(MaxAmountEnergy - AmountFatigue);
 
@@ -97,5 +97,10 @@ public class GameSession : Singleton<GameSession>
         }
 
         The.EventManager.AmountFatigueChanged(AmountFatigue);
+    }
+
+    public int CalculateFatigueChange()
+    {
+        return Mathf.RoundToInt(MaxAmountEnergy * The.ConfigManager.GetRecoveryPercentageAtEndOfDay());
     }
 }
