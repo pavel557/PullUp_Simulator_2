@@ -9,13 +9,19 @@ public class Main : MonoBehaviour
     void Start()
     {
         The.ConfigManager.Init();
-        The.GameSession.Init();
+        The.SaveManager.LoadGame();
         MainPanel.Init();
         The.PullupManager.Init();
     }
 
-    //void Update()
-    //{
-        
-    //}
+    private void OnApplicationFocus(bool focus)
+    {
+        if (focus == false)
+            The.SaveManager.SaveGame();
+    }
+
+    private void OnApplicationQuit()
+    {
+        The.SaveManager.SaveGame();
+    }
 }

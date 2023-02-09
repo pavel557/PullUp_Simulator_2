@@ -14,8 +14,8 @@ public class EnergyPanel : MonoBehaviour
 
     public void Init()
     {
-        ChangeEnergy(The.GameSession.CurrentAmountEnergy, The.GameSession.MaxAmountEnergy);
-        ChangeFatigue(The.GameSession.AmountFatigue);
+        ChangeEnergy(The.GameSession.Parameters.CurrentAmountEnergy, The.GameSession.Parameters.MaxAmountEnergy);
+        ChangeFatigue(The.GameSession.Parameters.AmountFatigue);
 
         The.EventManager.AmountEnergyChanged += ChangeEnergy;
         The.EventManager.AmountFatigueChanged += ChangeFatigue;
@@ -30,6 +30,6 @@ public class EnergyPanel : MonoBehaviour
     private void ChangeFatigue(int value)
     {
         FatigueText.text = value.ToString();
-        FatigueBar.fillAmount = (float)value / The.GameSession.MaxAmountEnergy;
+        FatigueBar.fillAmount = (float)value / The.GameSession.Parameters.MaxAmountEnergy;
     }
 }

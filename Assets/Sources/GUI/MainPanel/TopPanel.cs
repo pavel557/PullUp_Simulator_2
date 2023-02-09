@@ -10,8 +10,8 @@ public class TopPanel : MonoBehaviour
 
     public void Init()
     {
-        ChangeDayText(The.GameSession.Day);
-        ChangeMoneyText(The.GameSession.Money);
+        ChangeDayText(The.GameSession.Parameters.Day);
+        ChangeMoneyText(The.GameSession.Parameters.Money);
 
         The.EventManager.DayChanged += ChangeDayText;
         The.EventManager.MoneyChanged += ChangeMoneyText;

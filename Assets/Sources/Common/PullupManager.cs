@@ -36,7 +36,7 @@ public class PullupManager : Singleton<PullupManager>
             return;
         }
 
-        if ((CurrentAmountOfEffort >= RequiredAmountOfEffort)&&(The.GameSession.CurrentAmountEnergy != 0))
+        if ((CurrentAmountOfEffort >= RequiredAmountOfEffort)&&(The.GameSession.Parameters.CurrentAmountEnergy != 0))
         {
             The.GameSession.ChangeMoney(1);
             CurrentAmountPullups++;
