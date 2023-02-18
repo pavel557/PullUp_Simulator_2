@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GooglePlayGames;
 
 public class Main : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class Main : MonoBehaviour
 
     void Start()
     {
+        PlayGamesPlatform.Activate();
+        Social.localUser.Authenticate((bool success) => { });
+
         The.ConfigManager.Init();
         The.SaveManager.LoadGame();
         MainPanel.Init();

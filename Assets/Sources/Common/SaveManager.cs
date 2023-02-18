@@ -34,10 +34,12 @@ public class SaveManager : Singleton<SaveManager>
 
             var parameters = MessagePackSerializer.Deserialize<GameSessionParameters>(dataBytes);
             The.GameSession.Init(parameters);
+            Debug.Log("Save load");
         }
         catch
         {
             The.GameSession.Init();
+            Debug.Log("Save not load");
         }
         
     }

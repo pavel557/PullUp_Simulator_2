@@ -7,6 +7,7 @@ public class BottomPanel : MonoBehaviour
 {
     [SerializeField] private Button StartRepeatingButton;
     [SerializeField] private Button EndDayButton;
+    [SerializeField] private Button HighScoreTableButton;
 
 
     public void Init()
@@ -16,6 +17,7 @@ public class BottomPanel : MonoBehaviour
 
         StartRepeatingButton.onClick.AddListener(OnStartRepeatingButtonClick);
         EndDayButton.onClick.AddListener(OnEndDayButtonClick);
+        HighScoreTableButton.onClick.AddListener(OnHighScoreTableButton);
 
         The.EventManager.EndPullUp += () => { StartRepeatingButton.interactable = true; };
         The.EventManager.EndPullUp += () => { EndDayButton.interactable = true; };
@@ -34,5 +36,10 @@ public class BottomPanel : MonoBehaviour
         var objPanel = Instantiate(Resources.Load<GameObject>("GUI/NextDayPanel"), transform.parent.parent);
         var nextDayPanel = objPanel.GetComponent<NextDayPanel>();
         nextDayPanel.Init();
+    }
+
+    private void OnHighScoreTableButton()
+    {
+        Social.ShowLeaderboardUI();
     }
 }

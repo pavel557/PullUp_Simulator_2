@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MessagePack;
 
 
 public class GameSession : Singleton<GameSession>
 {
     public GameSessionParameters Parameters { get; private set; }
+
+    private string LEADERBOARD_ID = "CgkI6fXl7ocKEAIQAQ";
 
     public void Init()
     {
@@ -49,6 +50,7 @@ public class GameSession : Singleton<GameSession>
 
         if (Parameters.CurrentAmountEnergy <= 0)
         {
+            ChangeMaxPullups(The.PullupManager.CurrentAmountPullups);
             The.EventManager.EndPullUp?.Invoke();
 
             int amountFatigue = Mathf.RoundToInt(Parameters.MaxAmountEnergy * The.ConfigManager.GetFatiguePercentageAfterRepetition());
@@ -85,28 +87,13 @@ public class GameSession : Singleton<GameSession>
     {
         return Mathf.RoundToInt(Parameters.MaxAmountEnergy * The.ConfigManager.GetRecoveryPercentageAtEndOfDay());
     }
-}
 
-[MessagePackObject]
-public class GameSessionParameters
-{
-    [Key(0)] public int Day { get; set; }
-    [Key(1)] public int Money { get; set; }
-    [Key(2)] public int MaxAmountEnergy { get; set; }
-    [Key(3)] public int CurrentAmountEnergy { get; set; }
-    [Key(4)] public int AmountFatigue { get; set; }
-    [Key(5)] public int MaxPullups { get; set; }
-    [Key(6)] public int MaxNumberRepetitions { get; set; }
-
-    public GameSessionParameters()
+    public void ChangeMaxPullups(int countPullups)
     {
-        Day = 1;
-        Money = 0;
-        MaxAmountEnergy = 100;
-        CurrentAmountEnergy = 100;
-        AmountFatigue = 0;
-
-        MaxPullups = 0;
-        MaxNumberRepetitions = 0;
+        if (countPullups > Parameters.MaxPullups)
+        {
+            Parameters.MaxPullups = countPullups;
+            Social.ReportScore(countPullups, LEADERBOARD_ID, ((bool success) => { }));
+        }
     }
 }

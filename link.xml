@@ -1,0 +1,6 @@
+<linker>
+     <assembly fullname="mscorlib">
+         <type fullname="System.Runtime.Serialization" preserve="all"/>
+     </assembly>
+ 
+</linker>

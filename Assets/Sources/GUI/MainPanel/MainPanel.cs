@@ -21,6 +21,7 @@ public class MainPanel : MonoBehaviour
         The.EventManager.StartPullUp += () => { MainButton.interactable = true; };
         The.EventManager.EndPullUp += () => { MainButton.interactable = false; };
         MainButton.onClick.AddListener(OnMainButtonClick);
+        Debug.Log("MainPanel Init");
     }
 
     public void OnMainButtonClick()

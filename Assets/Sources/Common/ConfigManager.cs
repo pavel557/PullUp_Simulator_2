@@ -21,6 +21,8 @@ public class ConfigManager : Singleton<ConfigManager>
         IndexEnergyGainBonusPercentageAtEndOfDay = 0;
         IndexBasicAmountOfEffortForPullingUp = 0;
         IndexTimeToLoseEnergyDuringPullUps = 0;
+
+        Debug.Log("Config init");
     }
 
     public float GetFatiguePercentageAfterRepetition()
