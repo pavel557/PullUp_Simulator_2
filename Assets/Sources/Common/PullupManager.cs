@@ -11,7 +11,11 @@ public class PullupManager : Singleton<PullupManager>
 
     public Coroutine DecreaseForce;
 
+    public bool PullupAnimationPlays;
+
     private float ReloadingDecreaseForce;
+
+    
 
     public void Init()
     {
@@ -19,6 +23,8 @@ public class PullupManager : Singleton<PullupManager>
         RequiredAmountOfEffort = The.ConfigManager.GetBasicAmountOfEffortForPullingUp();
         CurrentAmountPullups = 0;
         SumPullups = 0;
+
+        PullupAnimationPlays = false;
 
         ReloadingDecreaseForce = The.ConfigManager.GetTimeToLoseEnergyDuringPullUps();
 

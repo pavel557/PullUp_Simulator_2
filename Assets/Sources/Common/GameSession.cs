@@ -17,6 +17,11 @@ public class GameSession : Singleton<GameSession>
     public void Init(GameSessionParameters gameSessionParameters)
     {
         Parameters = gameSessionParameters;
+
+        if (Parameters.CurrentAmountEnergy + Parameters.AmountFatigue != Parameters.MaxAmountEnergy)
+        {
+            Parameters.CurrentAmountEnergy = Parameters.MaxAmountEnergy - Parameters.AmountFatigue;
+        }
     }
 
     public void ChangeDay()

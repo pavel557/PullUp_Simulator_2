@@ -19,14 +19,24 @@ public class MainPanel : MonoBehaviour
         CounterPullup.Init();
         MainButton.interactable = false;
         The.EventManager.StartPullUp += () => { MainButton.interactable = true; };
+        The.EventManager.PullUp += () => { StartCoroutine(WaitingForPullupComplete(1f)); };
         The.EventManager.EndPullUp += () => { MainButton.interactable = false; };
         MainButton.onClick.AddListener(OnMainButtonClick);
-        Debug.Log("MainPanel Init");
     }
 
     public void OnMainButtonClick()
     {
-        The.GameSession.ChangeCurrentAmountEnergy(-1);
-        The.PullupManager.ChangeCurrentForce(1);
+        if (!The.PullupManager.PullupAnimationPlays)
+        {
+            The.GameSession.ChangeCurrentAmountEnergy(-1);
+            The.PullupManager.ChangeCurrentForce(1);
+        }
+    }
+
+    private IEnumerator WaitingForPullupComplete(float sec)
+    {
+        The.PullupManager.PullupAnimationPlays = true;
+        yield return new WaitForSeconds(sec);
+        The.PullupManager.PullupAnimationPlays = false;
     }
 }
