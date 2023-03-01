@@ -27,7 +27,7 @@ public class GameSession : Singleton<GameSession>
     public void ChangeDay()
     {
         Parameters.Day++;
-        ChangeMaxAmountEnergy(The.PullupManager.SumPullups);
+        ChangeMaxAmountEnergy(Mathf.RoundToInt(The.PullupManager.SumPullups * (1 + The.ConfigManager.GetEnergyGainBonusPercentageAtEndOfDay())));
 
         int amountFatigue = CalculateFatigueChange();
         ChangeAmountFatigue(-amountFatigue);

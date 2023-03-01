@@ -11,12 +11,23 @@ public class SaveManager : Singleton<SaveManager>
 
     public void SaveGame()
     {
-        byte[] bytes = MessagePackSerializer.Serialize(The.GameSession.Parameters);
+        try
+        {
+            byte[] bytesParameters = MessagePackSerializer.Serialize(The.GameSession.Parameters);
+            byte[] bytesShop = MessagePackSerializer.Serialize(The.ConfigManager.Shop);
 
-        using var stream = File.Open(Path, FileMode.OpenOrCreate);
-        using var writer = new BinaryWriter(stream);
-        writer.Write(bytes.Length);
-        writer.Write(bytes);
+            using var stream = File.Open(Path, FileMode.OpenOrCreate);
+            using var writer = new BinaryWriter(stream);
+            writer.Write(bytesParameters.Length);
+            writer.Write(bytesParameters);
+            writer.Write(bytesShop.Length);
+            writer.Write(bytesShop);
+            Debug.Log("File save");
+        }
+        catch
+        {
+            Debug.Log("File not save");
+        }
     }
 
     public void LoadGame()
@@ -31,16 +42,21 @@ public class SaveManager : Singleton<SaveManager>
             using var reader = new BinaryReader(stream);
             var dataLength = reader.ReadInt32();
             var dataBytes = reader.ReadBytes(dataLength);
-
+            Debug.Log("file read");
             var parameters = MessagePackSerializer.Deserialize<GameSessionParameters>(dataBytes);
             The.GameSession.Init(parameters);
+            Debug.Log("parametrs read");
+            dataLength = reader.ReadInt32();
+            dataBytes = reader.ReadBytes(dataLength);
+            var shop = MessagePackSerializer.Deserialize<Shop>(dataBytes);
+            The.ConfigManager.Init(shop);
             Debug.Log("Save load");
         }
         catch
         {
             The.GameSession.Init();
+            The.ConfigManager.Init(new Shop());
             Debug.Log("Save not load");
         }
-        
     }
 }

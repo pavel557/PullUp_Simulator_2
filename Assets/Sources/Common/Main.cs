@@ -12,7 +12,6 @@ public class Main : MonoBehaviour
         PlayGamesPlatform.Activate();
         Social.localUser.Authenticate((bool success) => { });
 
-        The.ConfigManager.Init();
         The.SaveManager.LoadGame();
         MainPanel.Init();
         The.PullupManager.Init();
