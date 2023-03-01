@@ -20,8 +20,8 @@ public class ShopPanel : MonoBehaviour
 
         BackButton.onClick.AddListener(() => Destroy(this.gameObject));
 
-        FoodElementGroup.Init(The.ConfigManager.Shop.LevelFood, DescriptionText, BuyButton);
-        HorizontalBarElementGroup.Init(The.ConfigManager.Shop.LevelHorizontalBar, DescriptionText, BuyButton);
-        BedGroupElementGroup.Init(The.ConfigManager.Shop.LevelBed, DescriptionText, BuyButton);
+        FoodElementGroup.Init(The.ConfigManager.Shop.LevelFood, The.ConfigManager.Config.EnergyGainBonusPercentageAtEndOfDay, DescriptionText, BuyButton);
+        HorizontalBarElementGroup.Init(The.ConfigManager.Shop.LevelHorizontalBar, The.ConfigManager.Config.FatiguePercentageAfterRepetition, DescriptionText, BuyButton, true);
+        BedGroupElementGroup.Init(The.ConfigManager.Shop.LevelBed, The.ConfigManager.Config.RecoveryPercentageAtEndOfDay, DescriptionText, BuyButton);
     }
 }

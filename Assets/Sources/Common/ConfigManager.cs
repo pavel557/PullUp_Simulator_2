@@ -15,26 +15,26 @@ public class ConfigManager : Singleton<ConfigManager>
 
     public float GetFatiguePercentageAfterRepetition()
     {
-        return Config.FatiguePercentageAfterRepetition[Shop.LevelHorizontalBar.GetLevel()];
+        return Config.FatiguePercentageAfterRepetition[Shop.LevelHorizontalBar.Level].Coefficient;
     }
 
     public float GetRecoveryPercentageAtEndOfDay()
     {
-        return Config.RecoveryPercentageAtEndOfDay[Shop.LevelBed.GetLevel()];
+        return Config.RecoveryPercentageAtEndOfDay[Shop.LevelBed.Level].Coefficient;
     }
 
     public float GetEnergyGainBonusPercentageAtEndOfDay()
     {
-        return Config.EnergyGainBonusPercentageAtEndOfDay[Shop.LevelFood.GetLevel()];
+        return Config.EnergyGainBonusPercentageAtEndOfDay[Shop.LevelFood.Level].Coefficient;
     }
 
     public int GetBasicAmountOfEffortForPullingUp()
     {
-        return Config.BasicAmountOfEffortForPullingUp[Shop.LevelCloth.GetLevel()];
+        return Mathf.RoundToInt(Config.BasicAmountOfEffortForPullingUp[Shop.LevelCloth.Level].Coefficient);
     }
 
     public float GetTimeToLoseEnergyDuringPullUps()
     {
-        return Config.TimeToLoseEnergyDuringPullUps[Shop.LevelMusic.GetLevel()];
+        return Config.TimeToLoseEnergyDuringPullUps[Shop.LevelMusic.Level].Coefficient;
     }
 }

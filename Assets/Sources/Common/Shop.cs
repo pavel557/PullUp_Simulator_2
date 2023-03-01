@@ -14,10 +14,10 @@ public class Shop
 
     public Shop()
     {
-        LevelHorizontalBar = new ShopItemLevel();
-        LevelBed = new ShopItemLevel();
-        LevelFood = new ShopItemLevel();
-        LevelCloth = new ShopItemLevel();
-        LevelMusic = new ShopItemLevel();
+        LevelHorizontalBar = new ShopItemLevel(0);
+        LevelBed = new ShopItemLevel(0);
+        LevelFood = new ShopItemLevel(0);
+        LevelCloth = new ShopItemLevel(0);
+        LevelMusic = new ShopItemLevel(0);
     }
 }

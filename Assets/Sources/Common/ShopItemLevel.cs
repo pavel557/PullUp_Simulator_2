@@ -6,25 +6,20 @@ using UnityEngine;
 [MessagePackObject]
 public class ShopItemLevel
 {
-    [Key(0)] private int level;
+    [Key(0)] public int Level;
 
-    public ShopItemLevel() 
+    public ShopItemLevel(int value) 
     {
-        level = 0;
+        Level = value;
     }
 
     public void SetLevel(int newLevel)
     {
-        level = newLevel;
+        Level = newLevel;
     }
 
     public void LevelUp()
     {
-        level++;
-    }
-
-    public int GetLevel()
-    {
-        return level;
+        Level++;
     }
 }
