@@ -15,16 +15,14 @@ MonoBehaviour:
   FatiguePercentageAfterRepetition:
   - Cost: 0
     Coefficient: 0.33
-  - Cost: 30
+  - Cost: 3
     Coefficient: 0.3
-  - Cost: 50
+  - Cost: 5
     Coefficient: 0.27
-  - Cost: 75
+  - Cost: 7
     Coefficient: 0.24
-  - Cost: 100
+  - Cost: 10
     Coefficient: 0.2
-  - Cost: 200
-    Coefficient: 0.15
   RecoveryPercentageAtEndOfDay:
   - Cost: 0
     Coefficient: 0.5
@@ -49,6 +47,8 @@ MonoBehaviour:
     Coefficient: 0.3
   - Cost: 50
     Coefficient: 0.5
+  - Cost: 100
+    Coefficient: 0.75
   BasicAmountOfEffortForPullingUp:
   - Cost: 0
     Coefficient: 10

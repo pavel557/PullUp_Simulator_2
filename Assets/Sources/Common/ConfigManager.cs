@@ -11,6 +11,7 @@ public class ConfigManager : Singleton<ConfigManager>
     {
         Config = Resources.Load<Config>("Configs/Config");
         Shop = shop;
+        The.EventManager.EnvironmentChanged(Shop.LevelHorizontalBar.Level);
     }
 
     public float GetFatiguePercentageAfterRepetition()

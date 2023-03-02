@@ -15,4 +15,6 @@ public class EventManager : Singleton<EventManager>
     public Action StartPullUp;
     public Action PullUp;
     public Action EndPullUp;
+
+    public Action<int> EnvironmentChanged;
 }
